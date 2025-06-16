@@ -32,16 +32,30 @@ func (s *SyncMap[K, V]) Get(kw K) (V, bool) {
 	return v, ok
 }
 
+// Store data key/value
 func (s *SyncMap[K, V]) Put(kw K, val V) {
 	s.locker.Lock()
 	s.m[kw] = val
 	s.locker.Unlock()
 }
 
+// Clear all data
 func (s *SyncMap[K, V]) Clear() {
 	s.locker.Lock()
 	for k, _ := range s.m {
 		delete(s.m, k)
 	}
 	s.locker.Unlock()
+}
+
+// usage:
+//
+//	for key,value := range m.ForRange()
+//		// operate key/value
+func (s *SyncMap[K, V]) ForRange() map[K]V {
+	res := make(map[K]V)
+	for k, v := range s.m {
+		res[k] = v
+	}
+	return res
 }
