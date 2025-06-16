@@ -1,4 +1,5 @@
-package main
+// generics sync map
+package syncmap
 
 import (
 	"sync"
@@ -11,7 +12,7 @@ type SyncMap[K comparable, V any] struct {
 
 // usage:
 //
-//	var m SyncMap[int]string = NewSyncMap( make( map[int]string ) )
+//	var m SyncMap[int,string] = NewSyncMap( make( map[int]string ) )
 //	m := NewSyncMap( make( map[int]string ) )
 //
 // These 2 work same.
