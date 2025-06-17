@@ -58,6 +58,11 @@ func TestSyncMap4(t *testing.T) {
 		t.Log("TestSyncMap4, error 2")
 		t.Fail()
 	}
+
+	if m.Len() != 3 {
+		t.Log("TestSyncMap4, error .Len()")
+		t.Fail()
+	}
 }
 
 func useMap(m *SyncMap[string, int], kw string) int {

@@ -54,8 +54,18 @@ func (s *SyncMap[K, V]) Clear() {
 //		// operate key/value
 func (s *SyncMap[K, V]) ForRange() map[K]V {
 	res := make(map[K]V)
+	s.locker.Lock()
 	for k, v := range s.m {
 		res[k] = v
 	}
+	s.locker.Unlock()
 	return res
+}
+
+func (s *SyncMap[K, V]) Len() int {
+	var ret int
+	s.locker.Lock()
+	ret = len(s.m)
+	s.locker.Unlock()
+	return ret
 }
