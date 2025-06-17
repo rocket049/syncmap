@@ -39,6 +39,13 @@ func (s *SyncMap[K, V]) Put(kw K, val V) {
 	s.locker.Unlock()
 }
 
+// Delete key data
+func (s *SyncMap[K, V]) Delete(kw K) {
+	s.locker.Lock()
+	delete(s.m, kw)
+	s.locker.Unlock()
+}
+
 // Clear all data
 func (s *SyncMap[K, V]) Clear() {
 	s.locker.Lock()

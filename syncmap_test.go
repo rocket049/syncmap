@@ -10,10 +10,17 @@ func TestSyncMap1(t *testing.T) {
 	m := NewSyncMap(make(map[string]int))
 
 	m.Put("pig", 10)
+	m.Put("dog", 20)
 
 	v, _ := m.Get("pig")
 	if v != 10 {
-		t.Log("TestSyncMap1")
+		t.Log("TestSyncMap1: Get")
+		t.Fail()
+	}
+
+	m.Delete("pig")
+	if m.Len() != 1 {
+		t.Log("TestSyncMap1: Delete")
 		t.Fail()
 	}
 }
